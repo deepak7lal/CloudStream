@@ -1,0 +1,57 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: cloudstream-backend
+    restart: always
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+      - minio
+
+    volumes:
+      - ./backend:/app
+
+  postgres:
+    image: postgres:16
+    container_name: cloudstream-postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cloudstream
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:latest
+    container_name: cloudstream-minio
+    restart: always
+
+    command: server /data --console-address ":9001"
+
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  minio_data:
