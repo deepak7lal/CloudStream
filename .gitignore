@@ -1,1 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
 
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Python test cache
+.pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Docker
+*.pid
+
+# MinIO data (if stored locally)
+minio-data/
+
+# PostgreSQL data (if stored locally)
+postgres-data/
