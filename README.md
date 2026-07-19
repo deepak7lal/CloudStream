@@ -1,6 +1,6 @@
 # ☁️ CloudStream
 
-CloudStream is a cloud-native file storage backend built using **FastAPI**, **PostgreSQL**, **MinIO**, and **Docker**. It provides secure JWT-based authentication and file management APIs, making it a scalable foundation for cloud applications.
+A cloud-native file storage platform built using **FastAPI, PostgreSQL, MinIO, Docker, and Kubernetes**. CloudStream demonstrates modern DevOps practices including containerization, orchestration, autoscaling, object storage, and secure authentication.
 
 ---
 
@@ -8,72 +8,83 @@ CloudStream is a cloud-native file storage backend built using **FastAPI**, **Po
 
 - 🔐 JWT Authentication
 - 👤 User Registration & Login
-- 📤 File Upload
-- 📥 File Download
-- 📋 List Uploaded Files
-- 🗑️ Delete Files
-- 🐘 PostgreSQL for metadata storage
-- 📦 MinIO for object storage
-- 🐳 Docker & Docker Compose support
-- 📖 Interactive Swagger API documentation
+- 📁 File Upload API
+- 🗄️ PostgreSQL Database
+- ☁️ MinIO Object Storage
+- 🐳 Docker & Docker Compose
+- ☸️ Kubernetes Deployment
+- 🌐 Kubernetes Ingress
+- 📈 Horizontal Pod Autoscaler (HPA)
+- ❤️ Health Checks
+- 📖 Interactive Swagger API Documentation
 
 ---
 
-## 🛠️ Tech Stack
+# 🏗️ Architecture
 
-| Technology | Purpose |
-|------------|---------|
-| FastAPI | Backend API |
-| SQLAlchemy | ORM |
-| PostgreSQL | Database |
-| MinIO | Object Storage |
-| JWT | Authentication |
-| Docker | Containerization |
-| Docker Compose | Multi-container orchestration |
-| Python 3.11 | Programming Language |
-
----
-
-## 📂 Project Structure
-
-```text
-CloudStream/
-│
-├── backend/
-│   ├── app/
-│   │   ├── routers/
-│   │   │   ├── auth.py
-│   │   │   └── files.py
-│   │   ├── auth.py
-│   │   ├── config.py
-│   │   ├── database.py
-│   │   ├── file_models.py
-│   │   ├── minio_client.py
-│   │   ├── models.py
-│   │   ├── schemas.py
-│   │   └── main.py
-│   │
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── .dockerignore
-│
-├── docker-compose.yml
-├── .env
-└── README.md
+```
+                    User
+                      │
+                      ▼
+                 Kubernetes Ingress
+                      │
+                      ▼
+               FastAPI Backend
+                 │          │
+                 │          │
+                 ▼          ▼
+          PostgreSQL     MinIO
+             Database   Object Storage
 ```
 
 ---
 
-## ⚙️ Installation
+# 🛠️ Tech Stack
 
-### Clone the repository
+| Technology | Purpose |
+|------------|---------|
+| FastAPI | Backend Framework |
+| PostgreSQL | Relational Database |
+| MinIO | Object Storage |
+| Docker | Containerization |
+| Kubernetes | Container Orchestration |
+| Docker Compose | Local Development |
+| JWT | Authentication |
+| GitHub | Version Control |
+
+---
+
+# 📂 Project Structure
+
+```
+CloudStream/
+│
+├── backend/
+├── frontend/
+├── docker/
+├── kubernetes/
+├── monitoring/
+├── docs/
+│
+├── docker-compose.yml
+├── README.md
+└── .gitignore
+```
+
+---
+
+# ⚙️ Local Setup
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/deepak7lal/CloudStream.git
 cd CloudStream
 ```
 
-### Start the application
+---
+
+## Docker Compose
 
 ```bash
 docker compose up --build
@@ -81,136 +92,96 @@ docker compose up --build
 
 ---
 
-## 🌐 Services
+## Kubernetes Deployment
 
-| Service | URL |
-|---------|-----|
-| FastAPI Docs | http://localhost:8000/docs |
-| MinIO Console | http://localhost:9001 |
-| PostgreSQL | localhost:5432 |
+```bash
+kubectl apply -f kubernetes/
+```
+
+Check resources:
+
+```bash
+kubectl get all -n cloudstream
+```
 
 ---
 
-## 🔑 Default MinIO Credentials
+# 📡 API Documentation
+
+Swagger UI
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+# 📦 MinIO Console
+
+```
+http://localhost:9001
+```
+
+Default Credentials
 
 Username
 
-```text
+```
 minioadmin
 ```
 
 Password
 
-```text
+```
 minioadmin123
 ```
 
 ---
 
-## 🔒 Authentication
+# 📊 Kubernetes Components
 
-CloudStream uses **JWT (JSON Web Tokens)**.
-
-### Register
-
-```
-POST /auth/register
-```
-
-### Login
-
-```
-POST /auth/login
-```
-
-After logging in, use the generated **Bearer Token** to access protected endpoints.
+- Namespace
+- Deployment
+- Service
+- Secret
+- Persistent Volume Claim
+- Ingress
+- Horizontal Pod Autoscaler
+- Metrics Server
 
 ---
 
-## 📁 File APIs
+# 📷 Screenshots
 
-### Upload File
+Add screenshots here:
 
-```
-POST /files/upload
-```
-
-### List Files
-
-```
-GET /files
-```
-
-### Download File
-
-```
-GET /files/{id}
-```
-
-### Delete File
-
-```
-DELETE /files/{id}
-```
+- Swagger UI
+- MinIO Dashboard
+- Kubernetes Pods
+- HPA
+- Ingress
+- Docker Desktop
 
 ---
 
-## 🏗️ Architecture
+# 🔮 Future Improvements
 
-```text
-                User
-                  │
-                  ▼
-            FastAPI Backend
-                  │
-        ┌─────────┴─────────┐
-        │                   │
-        ▼                   ▼
- PostgreSQL            MinIO Object Storage
-(File Metadata)          (Uploaded Files)
-                  │
-           Docker Compose
-```
-
----
-
-## 🎯 Learning Outcomes
-
-This project demonstrates:
-
-- FastAPI REST API Development
-- JWT Authentication
-- SQLAlchemy ORM
-- PostgreSQL Integration
-- MinIO Object Storage
-- Docker Containerization
-- Docker Compose
-- Secure API Development
-- Cloud-native Backend Design
-
----
-
-## 🚀 Future Enhancements
-
-- Kubernetes Deployment
-- CI/CD with GitHub Actions
-- Role-Based Access Control (RBAC)
-- File Versioning
-- File Sharing
-- AWS S3 Support
-- Redis Caching
+- CI/CD using GitHub Actions
 - Monitoring with Prometheus & Grafana
+- HTTPS using Cert-Manager
+- AWS S3 Integration
+- Redis Caching
+- Role-Based Access Control (RBAC)
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Deepak Lal**
 
-GitHub: https://github.com/deepak7lal
+GitHub:
+https://github.com/deepak7lal
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
+# ⭐ If you found this project useful, please consider giving it a star.
