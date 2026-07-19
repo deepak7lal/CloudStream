@@ -1,7 +1,4 @@
-<img width="1863" height="957" alt="MiniO" src="https://github.com/user-attachments/assets/d28352c7-d38c-4b6a-8186-a0f3d0f8ce69" />
-<img width="600" height="83" alt="KUBERNETES PODS" src="https://github.com/user-attachments/assets/7b1974b8-d49a-4cd5-8dbf-fcb0a28cc3bf" />
-<img width="839" height="49" alt="HPA" src="https://github.com/user-attachments/assets/879b1d38-d51d-4cd0-a0e9-0b268b2514d2" />
-<img width="1806" height="939" alt="SWAGGER" src="https://github.com/user-attachments/assets/76aab438-dabe-43ec-82d5-59b9e8dd1312" />
+
 # ☁️ CloudStream
 
 A cloud-native file storage platform built using **FastAPI, PostgreSQL, MinIO, Docker, and Kubernetes**. CloudStream demonstrates modern DevOps practices including containerization, orchestration, autoscaling, object storage, and secure authentication.
@@ -185,6 +182,14 @@ Add screenshots here:
 
 GitHub:
 https://github.com/deepak7lal
+<img width="1806" height="939" alt="SWAGGER" src="https://github.com/user-attachments/assets/6140026f-b217-4829-a7d2-736b823072f9" />
+<img width="1863" height="957" alt="MinIO" src="https://github.com/user-attachments/assets/294d547c-6e31-4a03-9b49-861a0f50a668" />
+<img width="600" height="83" alt="KUBERNETES PODS" src="https://github.com/user-attachments/assets/e8dfadae-8cd3-4e79-9bbf-6af3b00eb90a" />
+<img width="839" height="49" alt="HPA" src="https://github.com/user-attachments/assets/ef5a1cbf-a706-49c0-a2d6-68eeef2c31a7" />
+
+
+
+
 
 ---
 
