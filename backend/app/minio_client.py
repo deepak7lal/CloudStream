@@ -1,5 +1,7 @@
 from minio import Minio
+from minio.error import S3Error
 import os
+import time
 
 MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "minio:9000")
 MINIO_ACCESS_KEY = os.getenv("MINIO_ROOT_USER", "minioadmin")
@@ -13,5 +15,10 @@ client = Minio(
     secure=False,
 )
 
-if not client.bucket_exists(BUCKET_NAME):
-    client.make_bucket(BUCKET_NAME)
+for _ in range(10):
+    try:
+        if not client.bucket_exists(BUCKET_NAME):
+            client.make_bucket(BUCKET_NAME)
+        break
+    except S3Error:
+        time.sleep(3)

@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: backend
+  namespace: cloudstream
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+        - name: backend
+          image: cloudstream-backend:v2
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8000
+
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@postgres:5432/cloudstream
+
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cloudstream-secret
+                  key: SECRET_KEY
+
+            - name: ALGORITHM
+              value: HS256
+
+            - name: ACCESS_TOKEN_EXPIRE_MINUTES
+              value: "30"
+
+            - name: MINIO_ENDPOINT
+              value: minio:9000
+
+            - name: MINIO_ROOT_USER
+              value: minioadmin
+
+            - name: MINIO_ROOT_PASSWORD
+              value: minioadmin123
+
+            - name: MINIO_BUCKET
+              value: cloudstream
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3

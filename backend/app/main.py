@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from app.routers import files
+from app import models
+from app import file_models
 
 from app.routers import auth
 from app.database import Base, engine
@@ -18,8 +20,9 @@ app.include_router(auth.router)
 
 @app.get("/")
 def root():
-    return {
-        "message": "Welcome to CloudStream API 🚀"
+   return {
+        "message": "CloudStream API Version 2",
+        "version": "v2"
     }
 
 @app.get("/health")
